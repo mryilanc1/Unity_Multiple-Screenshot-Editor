@@ -15,7 +15,8 @@ resolution records are saved as json file in Resources folder.
 
 ............................
 
-
+"How to use this editor ?" 
+https://youtu.be/eOFKDLy-7ho  
 
 
 by the way I am not a developer . I am a level designer.
