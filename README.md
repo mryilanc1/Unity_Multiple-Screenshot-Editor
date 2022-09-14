@@ -11,9 +11,11 @@ You will be able to take screenshots for iphone 13 pro max, iphone 8 plus, iphon
 
 resolution records are saved as json file in Resources folder.
 
+### You need to install Unity's recorder package for use this editor
+
 ............................
 
-### You need to install Unity's recorder package for use this editor
+
 
 
 by the way I am not a developer . I am a level designer.
