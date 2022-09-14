@@ -15,7 +15,8 @@ resolution records are saved as json file in Resources folder.
 
 ............................
 
-"How to use this editor ?" 
+You can learn "How to use this editor ?" on youtube video
+
 https://youtu.be/eOFKDLy-7ho  
 
 
