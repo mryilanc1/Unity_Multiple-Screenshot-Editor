@@ -8,7 +8,9 @@ Example:
 You will be able to take screenshots for iphone 13 pro max, iphone 8 plus, iphone 12, devices with one click. 
 
 ............................
+
 resolution records are saved as json file in Resources folder.
+
 ............................
 
 ### You need to install Unity's recorder package for use this editor
