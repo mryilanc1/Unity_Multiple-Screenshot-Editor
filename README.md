@@ -1,19 +1,13 @@
-# Unity Screenshot Editor
+# Unity Multiple Screenshot Editor
 
-Benefiting the Recorder package, I wrote an editor for getting ScreenShots for different resolutions at once.
+![image](https://user-images.githubusercontent.com/41707639/208209375-e7bd3418-dfa1-4951-8244-9c10cc86431c.png)
+![image](https://user-images.githubusercontent.com/41707639/208209386-459949ff-db70-4585-b4a9-0136368172be.png)
+![image](https://user-images.githubusercontent.com/41707639/208209437-4c146707-1b77-4e48-812f-58b19ceb4149.png)
+![image](https://user-images.githubusercontent.com/41707639/208209455-6547ea41-526e-486d-a15c-5367c7e3da33.png)
+![image](https://user-images.githubusercontent.com/41707639/208209473-4d4dd0e0-9cd8-4b25-a721-cc5299a6deba.png)
+![image](https://user-images.githubusercontent.com/41707639/208209487-21d416dc-3d0c-4e3e-be98-35a7ca396691.png)
+![image](https://user-images.githubusercontent.com/41707639/208209528-ab0bcd5e-5b2e-44a7-9e11-5590e05c6b79.png)
 
-Enter the resolution you want and auto-save with code into the json file. Take batch screenshots for different devices at once whenever you want.
-
-Example:
-You will be able to take screenshots for iphone 13 pro max, iphone 8 plus, iphone 12, devices with one click. 
-
-............................
-
-resolution records are saved as json file in Resources folder.
-
-### You need to install Unity's recorder package for use this editor
-
-............................
 
 You can learn "How to use this editor ?" on youtube video
 
@@ -30,12 +24,5 @@ I can write simple codes ... I coding my need tools.
 ![image](https://user-images.githubusercontent.com/41707639/207991024-044c5200-402a-4a29-b806-556ab403f12e.png)
 ------------------------------
 
-![image](https://user-images.githubusercontent.com/41707639/208209375-e7bd3418-dfa1-4951-8244-9c10cc86431c.png)
-![image](https://user-images.githubusercontent.com/41707639/208209386-459949ff-db70-4585-b4a9-0136368172be.png)
-![image](https://user-images.githubusercontent.com/41707639/208209437-4c146707-1b77-4e48-812f-58b19ceb4149.png)
-![image](https://user-images.githubusercontent.com/41707639/208209455-6547ea41-526e-486d-a15c-5367c7e3da33.png)
-![image](https://user-images.githubusercontent.com/41707639/208209473-4d4dd0e0-9cd8-4b25-a721-cc5299a6deba.png)
-![image](https://user-images.githubusercontent.com/41707639/208209487-21d416dc-3d0c-4e3e-be98-35a7ca396691.png)
-![image](https://user-images.githubusercontent.com/41707639/208209528-ab0bcd5e-5b2e-44a7-9e11-5590e05c6b79.png)
 
 
