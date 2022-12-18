@@ -12,7 +12,8 @@
 ![image](https://user-images.githubusercontent.com/41707639/208209487-21d416dc-3d0c-4e3e-be98-35a7ca396691.png)
 ![image](https://user-images.githubusercontent.com/41707639/208209528-ab0bcd5e-5b2e-44a7-9e11-5590e05c6b79.png)
 
-
+--------------
+## Old Version
 You can learn "How to use this editor ?" on youtube video
 
 https://youtu.be/eOFKDLy-7ho  
