@@ -26,7 +26,21 @@ Asset Store Link : https://assetstore.unity.com/packages/tools/utilities/multipl
 --------------
 ## Version V1.2
 
+Version 1.2
+4362937
+A lot of Fix and Adding new things
+
+New Things :
+
+1) Unity import display bar
+2) Pop-up for please give rate
+3) The window can be part of Unity layout
+4) Opening output folder after proggres complated
+
+
+![image](https://user-images.githubusercontent.com/41707639/212503093-2978a128-419f-4cbc-8031-33d69d08d295.png)
 ![image](https://user-images.githubusercontent.com/41707639/212503045-e7379bd1-edd8-4ca3-9914-55361992de4e.png)
+
 
 
 --------------
