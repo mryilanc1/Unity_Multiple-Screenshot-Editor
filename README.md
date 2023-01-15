@@ -26,8 +26,6 @@ Asset Store Link : https://assetstore.unity.com/packages/tools/utilities/multipl
 --------------
 ## Version V1.2
 
-Version 1.2:
-
 A lot of Fix and Adding new things
 
 New Things :
