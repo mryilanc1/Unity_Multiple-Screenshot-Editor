@@ -11,7 +11,7 @@ Asset Store Link : https://assetstore.unity.com/packages/tools/utilities/multipl
 ------------------------------
 ![image](https://user-images.githubusercontent.com/41707639/208209375-e7bd3418-dfa1-4951-8244-9c10cc86431c.png)
 ------------------------------
-## Version V2 
+## Version V1.1
 ![image](https://user-images.githubusercontent.com/41707639/207991024-044c5200-402a-4a29-b806-556ab403f12e.png)
 ------------------------------
 ![image](https://user-images.githubusercontent.com/41707639/208209386-459949ff-db70-4585-b4a9-0136368172be.png)
@@ -21,6 +21,12 @@ Asset Store Link : https://assetstore.unity.com/packages/tools/utilities/multipl
 ![image](https://user-images.githubusercontent.com/41707639/212502950-57be18d3-73c3-490d-9c03-32bc58072904.png)
 ![image](https://user-images.githubusercontent.com/41707639/212502954-c75d5e34-31b4-4ce3-bdc4-0e853130bf17.png)
 ![image](https://user-images.githubusercontent.com/41707639/212502962-e2d01c7e-6aa2-4b0b-8e61-498fc49c4ed8.png)
+
+
+--------------
+## Version V1.2
+
+![image](https://user-images.githubusercontent.com/41707639/212503045-e7379bd1-edd8-4ca3-9914-55361992de4e.png)
 
 
 --------------
