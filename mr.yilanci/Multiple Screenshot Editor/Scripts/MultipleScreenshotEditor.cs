@@ -157,8 +157,8 @@ namespace MultipleScreenshot.Editor
        
             if(GUILayout.Button ( "Show Folder",GUILayout.Height(50),GUILayout.MinWidth(160)))
             {
-               
-                Application.OpenURL(PlayerPrefs.GetString(_locationHash));
+
+                ShowFolder();
 
             }
 
@@ -195,7 +195,23 @@ namespace MultipleScreenshot.Editor
             EditorGUILayout.EndScrollView();
             
         }
-         
+
+         private void ShowFolder()
+         {
+             if (Application.platform == RuntimePlatform.WindowsEditor)
+             {
+                 Application.OpenURL(PlayerPrefs.GetString(_locationHash));
+             }
+               
+               
+               
+             else if (Application.platform == RuntimePlatform.OSXEditor)
+             {
+                 System.Diagnostics.Process.Start("open", (PlayerPrefs.GetString(_locationHash)));
+             }
+
+         }
+
          private async void DelayUseAsync()
          {
              
@@ -213,9 +229,10 @@ namespace MultipleScreenshot.Editor
                          Time.timeScale = 0;
                          Take_SS(unit.DeviceName, unit.Height, unit.Width);
                          await Task.Delay(1250);
+                         counter++;
                      }
                  _guide = "Completed";
-                 Application.OpenURL(PlayerPrefs.GetString(_locationHash));
+                 ShowFolder();
                  
                  PlayerPrefs.SetInt(_counterHash,PlayerPrefs.GetInt(_counterHash)+1);
 
