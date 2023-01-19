@@ -12,34 +12,34 @@ namespace MultipleScreenshot.Editor
     {
         public DeviceList Root = new DeviceList();
         private SerializedObject _soData;
-        private string  _localPath = "ScreenShots/";
         private static string _guide = "Guide";
         private GUIStyle _guiStyle = new GUIStyle();
         private Vector2 _scroll = Vector2.zero;
 
-        private int _deviceCount;
-        private int _spaceA = 300;
         private static string _location;
         private static string _dataPath;
         private const string _counterHash = "counter";
         private const string _locationHash = "location";
+       
+         
         
-        [MenuItem("Window/mr.yilanci/Multiple Screenshot Editor")]
+        [MenuItem("Window/mr.yilanci/Multiple Screenshot Editor #t")]
         public static void ShowWindow()
         {
             MultipleScreenshotEditor window = (MultipleScreenshotEditor) GetWindow(typeof(MultipleScreenshotEditor), false, "Multiple Screenshot Editor");
+           
+            window.minSize = new Vector2(340, 445);
             window.Show();
         }
-        
-      
-        
        
-
+        
+        
          private void OnGUI()
         {
             _scroll = EditorGUILayout.BeginScrollView(_scroll);
             _dataPath = PlayerPrefs.GetString(_locationHash);
-           
+            
+            
             GUILayout.BeginVertical();
             _guiStyle.fontSize = 11;
             _guiStyle.normal.textColor = Color.white;
@@ -293,7 +293,7 @@ namespace MultipleScreenshot.Editor
         private GUIStyle _guiStyle2 = new GUIStyle();
         private GUIStyle _guiStyle3 = new GUIStyle();
         
-        [MenuItem("Window/mr.yilanci/popup #t")]
+        [MenuItem("Window/mr.yilanci/Give Rate Pop-up")]
         public static void Init()
         {
             PopUp window = ScriptableObject.CreateInstance<PopUp>();
