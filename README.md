@@ -40,6 +40,29 @@ New Things :
 ![image](https://user-images.githubusercontent.com/41707639/212503045-e7379bd1-edd8-4ca3-9914-55361992de4e.png)
 
 
+--------------
+## Version V1.3
+
+A lot of Fix and Adding new things
+
+New Things :
+
+1)Editor Display bar fix 
+
+2) ShowFolder method fix for MacOs 
+
+3) Added  min size for The Editor Window
+
+4)Added Shotcut (Shift + t ) for open Multiple Screenshot Editor Window  
+
+5)Pop-up rename on Unity Editor tap bar  and deleted  shotcut of pop-up
+
+6)unused values are deleted
+
+
+
+
+
 
 --------------
 ## Old Version
