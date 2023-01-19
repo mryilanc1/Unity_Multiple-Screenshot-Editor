@@ -30,10 +30,10 @@ A lot of Fix and Adding new things
 
 New Things :
 
-1) Unity import display bar
-2) Pop-up for please give rate
-3) The window can be part of Unity layout
-4) Opening output folder after proggres complated
+  1) Unity import display bar
+  2) Pop-up for please give rate
+  3) The window can be part of Unity layout
+  4) Opening output folder after proggres complated
 
 
 ![image](https://user-images.githubusercontent.com/41707639/212503093-2978a128-419f-4cbc-8031-33d69d08d295.png)
@@ -47,12 +47,12 @@ A lot of Fix and Adding new things
 
 New Things :
 
-1)Editor Display bar fix
-2) ShowFolder method fix for MacOS
-3) Added  min size for The Editor Window
-4)Added Shotcut (Shift + t ) for open Multiple Screenshot Editor Window
-5)Pop-up rename on Unity Editor tap bar  and deleted  shotcut of pop-up
-6)unused values are deleted
+  1)Editor Display bar fix
+  2) ShowFolder method fix for MacOS
+  3) Added  min size for The Editor Window
+  4)Added Shotcut (Shift + t ) for open Multiple Screenshot Editor Window
+  5)Pop-up rename on Unity Editor tap bar  and deleted  shotcut of pop-up
+  6)unused values are deleted
 
 
 
