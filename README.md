@@ -55,10 +55,6 @@ New Things :
 
 
 
-![image](https://user-images.githubusercontent.com/41707639/212503093-2978a128-419f-4cbc-8031-33d69d08d295.png)
-![image](https://user-images.githubusercontent.com/41707639/212503045-e7379bd1-edd8-4ca3-9914-55361992de4e.png)
-
-
 --------------
 ## Old Version
 You can learn "How to use this editor ?" on youtube video
