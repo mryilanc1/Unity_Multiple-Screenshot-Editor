@@ -48,15 +48,10 @@ A lot of Fix and Adding new things
 New Things :
 
 1)Editor Display bar fix 
-
 2) ShowFolder method fix for MacOs 
-
 3) Added  min size for The Editor Window
-
 4)Added Shotcut (Shift + t ) for open Multiple Screenshot Editor Window  
-
 5)Pop-up rename on Unity Editor tap bar  and deleted  shotcut of pop-up
-
 6)unused values are deleted
 
 
