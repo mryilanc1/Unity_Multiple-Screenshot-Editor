@@ -51,6 +51,8 @@ New Things :
   2) ShowFolder method fix for MacOs 
   3) Added Shotcut (Shift + t ) for open Multiple Screenshot Editor Window
   4) Pop-up rename on Unity Editor tap bar  and deleted  shotcut of pop-up
+  5) unused values are deleted
+
 
 
 ![image](https://user-images.githubusercontent.com/41707639/212503093-2978a128-419f-4cbc-8031-33d69d08d295.png)
