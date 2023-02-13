@@ -1,26 +1,32 @@
+using System;
 using System.IO;
+using System.Collections;
 using UnityEngine;
 using System.Threading.Tasks;
 using UnityEditor.Recorder.Input;
 using UnityEditor.Recorder;
 using UnityEditor;
+using UnityEditor.Compilation;
+
 
 namespace MultipleScreenshot.Editor
 {
     using Enumerators;
     public class MultipleScreenshotEditor : EditorWindow
     {
-        public DeviceList Root = new DeviceList();
-        private SerializedObject _soData;
+        public  DeviceList _Root = new DeviceList();
+        private  SerializedObject _soData;
         private static string _guide = "Guide";
         private GUIStyle _guiStyle = new GUIStyle();
         private Vector2 _scroll = Vector2.zero;
-
+        public static SaveSetting.SaveSetting _saveSetting;
+        
         private static string _location;
         private static string _dataPath;
-        private const string _counterHash = "counter";
-        private const string _locationHash = "location";
-       
+        private static string _counterHash;
+        
+        
+        private int _rootElementCount;
          
         
         [MenuItem("Window/mr.yilanci/Multiple Screenshot Editor #t")]
@@ -29,15 +35,71 @@ namespace MultipleScreenshot.Editor
             MultipleScreenshotEditor window = (MultipleScreenshotEditor) GetWindow(typeof(MultipleScreenshotEditor), false, "Multiple Screenshot Editor");
            
             window.minSize = new Vector2(340, 445);
+            
             window.Show();
         }
-       
+
+    
+
+        private void OnEnable()
+      {/*
+          CompilationPipeline.assemblyCompilationStarted += CompilationPipelineOnAssemblyCompilationStarted;
+          CompilationPipeline.assemblyCompilationFinished += CompilationPipelineOnAssemblyCompilationFinished;
+          
+          https://gist.github.com/ericallam/c769cedb7050e8057230cc9d15492718
+          */
+          TextAsset json_yazi = new TextAsset(File.ReadAllText(Application.dataPath +"/mr.yilanci/Multiple Screenshot Editor/Json_Device_Currently_Save_List.json"));
+          _Root = JsonUtility.FromJson<DeviceList>(json_yazi.text);
+          
+          ScriptableObject target = this;
+          _soData = new SerializedObject(target);
+          
+          TextAsset json_setting = new TextAsset(File.ReadAllText(Application.dataPath +"/mr.yilanci/Multiple Screenshot Editor/Json_Setting.json"));
+          _saveSetting = JsonUtility.FromJson<SaveSetting.SaveSetting>(json_setting.text);
         
-        
-         private void OnGUI()
+      }
+
+      void OnDisable()
         {
+            string Json_added = JsonUtility.ToJson(_Root);
+            File.WriteAllText(Application.dataPath +"/mr.yilanci/Multiple Screenshot Editor/Json_Device_Currently_Save_List.json",Json_added);
+            ///// 
+            string Json_setting = JsonUtility.ToJson(_saveSetting);
+            File.WriteAllText(Application.dataPath +"/mr.yilanci/Multiple Screenshot Editor/Json_Setting.json",Json_setting);
+        }
+/*
+      private static void CompilationPipelineOnAssemblyCompilationStarted(string s)
+      {
+          string Json_added = JsonUtility.ToJson(_Root);
+          File.WriteAllText(Application.dataPath +"/mr.yilanci/Multiple Screenshot Editor/Json_Device_Currently_Save_List.json",Json_added);
+          
+          string Json_setting = JsonUtility.ToJson(_saveSetting);
+          File.WriteAllText(Application.dataPath +"/mr.yilanci/Multiple Screenshot Editor/Json_Setting.json",Json_setting);
+
+      }
+      
+      private static void CompilationPipelineOnAssemblyCompilationFinished(string f, CompilerMessage[] compilerMessages)
+      {
+          string Json_added = JsonUtility.ToJson(_Root);
+          File.WriteAllText(Application.dataPath +"/mr.yilanci/Multiple Screenshot Editor/Json_Device_Currently_Save_List.json",Json_added);
+          
+          string Json_setting = JsonUtility.ToJson(_saveSetting);
+          File.WriteAllText(Application.dataPath +"/mr.yilanci/Multiple Screenshot Editor/Json_Setting.json",Json_setting);
+
+      }*/
+      
+        private void OnGUI()
+        {
+            if (_Root.Device.Count != _rootElementCount )
+            {
+                string Json_added = JsonUtility.ToJson(_Root);
+                File.WriteAllText(Application.dataPath +"/mr.yilanci/Multiple Screenshot Editor/Json_Device_Currently_Save_List.json",Json_added);
+                _rootElementCount = _Root.Device.Count;
+            }
             _scroll = EditorGUILayout.BeginScrollView(_scroll);
-            _dataPath = PlayerPrefs.GetString(_locationHash);
+            _dataPath = _saveSetting.location;
+
+
             
             
             GUILayout.BeginVertical();
@@ -50,7 +112,7 @@ namespace MultipleScreenshot.Editor
             EditorStyles.helpBox.fontStyle = FontStyle.Bold;
             EditorGUILayout.LabelField(_guide, EditorStyles.helpBox,GUILayout.Height(30));
             GUILayout.Space(2);
-            EditorGUILayout.LabelField("Number of the output folder : "+PlayerPrefs.GetInt(_counterHash),_guiStyle,GUILayout.Height(15));
+            EditorGUILayout.LabelField("Number of the output folder : "+_saveSetting.counter,_guiStyle,GUILayout.Height(15));
             GUILayout.EndVertical();
             
             if (_dataPath == "")
@@ -58,30 +120,30 @@ namespace MultipleScreenshot.Editor
                 _guide = "You have to select folder for save Screenshot";
 
             }
-            else if (Root.Device.Count == 0)
+            else if (_Root.Device.Count == 0)
             {
                 _guide = "You have to add device resolution ";
 
             }
             EditorGUILayout.Space();
 
-
             EditorGUILayout.BeginVertical();
-            ScriptableObject target = this;
-            _soData = new SerializedObject(target);
-            SerializedProperty stringsProperty = _soData.FindProperty("Root");
-            EditorGUILayout.PropertyField(stringsProperty, true); // True means show children
+            
+            _soData.Update();
+            SerializedProperty stringsProperty = _soData.FindProperty("_Root");
+            EditorGUILayout.PropertyField(stringsProperty, new GUIContent("Device_Root"), true); // True means show children
             _soData.ApplyModifiedProperties();
+            
             EditorGUILayout.EndVertical();
             
-            
+            GUILayout.Space(27);
             GUILayout.BeginHorizontal();
             
-            if (EditorApplication.isPlaying != true &  Root.Device.Count ==0 )
+            if (EditorApplication.isPlaying != true &  _Root.Device.Count ==0 )
             {
                 GUI.backgroundColor = Color.red;
             }
-            if (EditorApplication.isPlaying != true & (_dataPath !=""|| Root.Device.Count > 0) )
+            if (EditorApplication.isPlaying != true & (_dataPath !=""|| _Root.Device.Count > 0) )
             {
                 GUI.backgroundColor = Color.green;
             }
@@ -105,7 +167,7 @@ namespace MultipleScreenshot.Editor
             if (GUILayout.Button( "Take Screenshot",GUILayout.Height(50),GUILayout.MinWidth(160)))
             {
             
-                if (EditorApplication.isPlaying & Root.Device.Count !=0)
+                if (EditorApplication.isPlaying & _Root.Device.Count !=0)
                 {
                     
                     _guide = "Editor Working";
@@ -113,7 +175,7 @@ namespace MultipleScreenshot.Editor
                     
                    
                 }
-                else if (EditorApplication.isPlaying & Root.Device.Count ==0)
+                else if (EditorApplication.isPlaying & _Root.Device.Count ==0)
                 {
                     _guide = "You have to add device resolution ";
                 }
@@ -134,7 +196,7 @@ namespace MultipleScreenshot.Editor
             {
                 
                 TextAsset json_yazi = new TextAsset(File.ReadAllText(Application.dataPath +"/mr.yilanci/Multiple Screenshot Editor/Json_Device_Save_List.json"));
-                Root = JsonUtility.FromJson<DeviceList>(json_yazi.text);
+                _Root = JsonUtility.FromJson<DeviceList>(json_yazi.text);
                 
                 _guide = "You have to Play Unity after Click to Take ScreenShot";
                 Debug.Log("Loaded Device List From Json ");
@@ -142,10 +204,10 @@ namespace MultipleScreenshot.Editor
             }
 
         
-            GUI.backgroundColor = Root.Device.Count == 0 ? Color.red : Color.yellow;
+            GUI.backgroundColor = _Root.Device.Count == 0 ? Color.red : Color.yellow;
             if (GUILayout.Button ( "Save to Json",GUILayout.Height(50),GUILayout.MinWidth(160)))
             {
-                string Json_added = JsonUtility.ToJson(Root);
+                string Json_added = JsonUtility.ToJson(_Root);
                 File.WriteAllText(Application.dataPath +"/mr.yilanci/Multiple Screenshot Editor/Json_Device_Save_List.json",Json_added);
             }
           
@@ -163,14 +225,14 @@ namespace MultipleScreenshot.Editor
             }
 
 
-            GUI.backgroundColor = PlayerPrefs.HasKey(_locationHash) ? Color.yellow : Color.green;
+            GUI.backgroundColor = _saveSetting.location != ""? Color.yellow : Color.green;
 
             if (GUILayout.Button ( "Where Save SS",GUILayout.Height(50),GUILayout.MinWidth(160)))
             {
                 _location = EditorUtility.OpenFolderPanel(_location, "", "");
-                PlayerPrefs.SetString(_locationHash,_location);
+                _saveSetting.location = _location;
                 
-                if (Root.Device.Count == 0)
+                if (_Root.Device.Count == 0)
                 {
                     _guide = "You have to add device resolution ";
                     Debug.Log("You have to add device resolution");
@@ -200,29 +262,29 @@ namespace MultipleScreenshot.Editor
          {
              if (Application.platform == RuntimePlatform.WindowsEditor)
              {
-                 Application.OpenURL(PlayerPrefs.GetString(_locationHash));
+                 Application.OpenURL(_saveSetting.location);
              }
                
                
                
              else if (Application.platform == RuntimePlatform.OSXEditor)
              {
-                 System.Diagnostics.Process.Start("open", (PlayerPrefs.GetString(_locationHash)));
+                 System.Diagnostics.Process.Start("open", (_saveSetting.location));
              }
 
          }
 
          private async void DelayUseAsync()
          {
-             
+             _counterHash = _saveSetting.counter.ToString();
             
             
              if (Path.IsPathRooted(_dataPath) )
              {
                  float counter = 0;
-                 float DevicesCounts = Root.Device.Count;
+                 float DevicesCounts = _Root.Device.Count;
                      
-                     foreach (var unit in Root.Device)
+                     foreach (var unit in _Root.Device)
                      { 
                          
                          EditorUtility.DisplayProgressBar("MultipleScreenshotEditor.cs", "Editor Working - Device in Progress: ''"+unit.DeviceName+"''" , counter /DevicesCounts);
@@ -233,14 +295,16 @@ namespace MultipleScreenshot.Editor
                      }
                  _guide = "Completed";
                  ShowFolder();
-                 
-                 PlayerPrefs.SetInt(_counterHash,PlayerPrefs.GetInt(_counterHash)+1);
 
+                 _saveSetting.counter++;
                  
                  
-                 if (PlayerPrefs.GetInt("Link_Opened") != 1)
+                 
+                 
+                 if (_saveSetting.clickDownload == false)
                  {
-                     PopUp.Init(); 
+                     PopUp.Init();
+                     
                  }
                 
              }
@@ -249,6 +313,10 @@ namespace MultipleScreenshot.Editor
              {
                  _guide = "!!! Write Path of outfile";
              }
+             
+             string Json_setting = JsonUtility.ToJson(_saveSetting);
+             File.WriteAllText(Application.dataPath +"/mr.yilanci/Multiple Screenshot Editor/Json_Setting.json",Json_setting);
+             
              EditorUtility.ClearProgressBar();
          }
          
@@ -279,9 +347,9 @@ namespace MultipleScreenshot.Editor
              m_RecorderController.StartRecording();
                
                
-             Directory.CreateDirectory(_dataPath +"/"+PlayerPrefs.GetInt(_counterHash)); // returns a DirectoryInfo object
+             Directory.CreateDirectory(_dataPath +"/"+ _counterHash); // returns a DirectoryInfo object
              
-             imageRecorder.OutputFile = Path.Combine(_dataPath +"/"+PlayerPrefs.GetInt(_counterHash), name) + DefaultWildcard.Frame;
+             imageRecorder.OutputFile = Path.Combine(_dataPath +"/"+_counterHash, name) + DefaultWildcard.Frame;
              var recorderWindow = GetWindow<RecorderWindow>();
              recorderWindow.StopRecording();
              recorderWindow.Close();
@@ -292,6 +360,7 @@ namespace MultipleScreenshot.Editor
 
         private GUIStyle _guiStyle2 = new GUIStyle();
         private GUIStyle _guiStyle3 = new GUIStyle();
+        public static SaveSetting.SaveSetting _saveSetting;
         
         [MenuItem("Window/mr.yilanci/Give Rate Pop-up")]
         public static void Init()
@@ -302,10 +371,24 @@ namespace MultipleScreenshot.Editor
             window.maximized = false;
             window.Show();
             
+           
+            
         }
-        
-      
-        
+
+        private void OnEnable()
+        {
+            TextAsset json_setting = new TextAsset(File.ReadAllText(Application.dataPath +"/mr.yilanci/Multiple Screenshot Editor/Json_Setting.json"));
+            _saveSetting = JsonUtility.FromJson<SaveSetting.SaveSetting>(json_setting.text);
+            Debug.Log(_saveSetting.clickDownload+"0");
+        }
+
+        private void OnDisable()
+        {
+            string Json_setting = JsonUtility.ToJson(_saveSetting);
+            File.WriteAllText(Application.dataPath +"/mr.yilanci/Multiple Screenshot Editor/Json_Setting.json",Json_setting);
+            Debug.Log(_saveSetting.clickDownload+"1");
+        }
+
         void OnGUI()
         {
          
@@ -334,10 +417,13 @@ namespace MultipleScreenshot.Editor
             
             if (GUI.Button(new Rect(50, 202 , 600 , 15),"https://assetstore.unity.com/packages/tools/utilities/multiple-screenshot-editor-235183",EditorStyles.linkLabel))
             {
+                _saveSetting.clickDownload = true;
+
                 Application.OpenURL("https://assetstore.unity.com/packages/tools/utilities/multiple-screenshot-editor-235183");
-                PlayerPrefs.SetInt("Link_Opened",1);
-                this.Close();
+                Debug.Log(_saveSetting.clickDownload+"3");
+  
             }
+            
             
             
             GUILayout.Space(235f);
@@ -346,7 +432,9 @@ namespace MultipleScreenshot.Editor
             if (GUILayout.Button("Yes,I Will Give Rate - Open The Asset's Page",GUILayout.Height(40)))
             {
                 Application.OpenURL("https://assetstore.unity.com/packages/tools/utilities/multiple-screenshot-editor-235183");
-                PlayerPrefs.SetInt("Link_Opened",1);
+                _saveSetting.clickDownload = true;
+                Debug.Log(_saveSetting.clickDownload+"4");
+
                 this.Close();
             }
             
