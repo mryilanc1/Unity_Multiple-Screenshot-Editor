@@ -2,7 +2,7 @@
 
 
 
-Unity Multiple Screenshot Editor on Asset Store
+Unity Multiple Screenshot Editor on Asset Store (latest version is in asset store)
 
 ![image](https://user-images.githubusercontent.com/41707639/212502813-1247b657-5407-4b26-9226-a0ac41861690.png)
 
