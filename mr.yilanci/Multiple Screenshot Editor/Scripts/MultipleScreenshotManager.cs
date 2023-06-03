@@ -44,7 +44,7 @@ namespace MultipleScreenshot.Editor
             _saveSetting = JsonUtility.FromJson<SaveSetting.SaveSetting>(json_setting.text);
             */
         }
-        public void StartingReadJson_2( )
+        public void StartingReadJson_settingdata( )
         {
             // Load Editor data  - Counter - location - click link bool for pop-up data
             TextAsset json_setting = new TextAsset(File.ReadAllText(Application.dataPath +"/mr.yilanci/Multiple Screenshot Editor/Json_Setting.json"));
@@ -61,6 +61,8 @@ namespace MultipleScreenshot.Editor
             // Save Editor data  - Counter - location - click link bool  for pop-up data
             string Json_setting = JsonUtility.ToJson(_saveSetting);
             File.WriteAllText(Application.dataPath +"/mr.yilanci/Multiple Screenshot Editor/Json_Setting.json",Json_setting);
+            AssetDatabase.Refresh();
+
         }
 
         public void SaveCurrentDevice(ref DeviceList _Root)
@@ -71,10 +73,13 @@ namespace MultipleScreenshot.Editor
                 string Json_added = JsonUtility.ToJson(_Root);
                 File.WriteAllText(Application.dataPath +"/mr.yilanci/Multiple Screenshot Editor/Json_Device_Currently_Save_List.json",Json_added);
                 _rootElementCount = _Root.Device.Count;
+                Debug.Log(",,-,,"+_rootElementCount);
             }
             
             // Assign Editor data  (Counter - location - click for pop-up data) to _dataPath
             _dataPath = _saveSetting.location;
+            AssetDatabase.Refresh();
+
         }
 
         public void PlayUnity()
@@ -176,13 +181,15 @@ namespace MultipleScreenshot.Editor
                  ShowFolder();
 
                  _saveSetting.counter++;
-                 
-                 
-                 
+
+
+                 AssetDatabase.Refresh();
+                 StartingReadJson_settingdata();
                  
                  if (_saveSetting.clickDownload == false)
                  {
                      PopUp.Init();
+                     
                      
                  }
                 
@@ -298,6 +305,8 @@ namespace MultipleScreenshot.Editor
             if (GUI.Button(new Rect(50, 202 , 600 , 15),"https://assetstore.unity.com/packages/tools/utilities/multiple-screenshot-editor-235183",EditorStyles.linkLabel))
             {
                 _saveSetting.clickDownload = true;
+                string Json_setting = JsonUtility.ToJson(_saveSetting);
+                File.WriteAllText(Application.dataPath +"/mr.yilanci/Multiple Screenshot Editor/Json_Setting.json",Json_setting);
 
                 Application.OpenURL("https://assetstore.unity.com/packages/tools/utilities/multiple-screenshot-editor-235183");
                 Debug.Log(_saveSetting.clickDownload+"3");
@@ -313,6 +322,8 @@ namespace MultipleScreenshot.Editor
             {
                 Application.OpenURL("https://assetstore.unity.com/packages/tools/utilities/multiple-screenshot-editor-235183");
                 _saveSetting.clickDownload = true;
+                string Json_setting = JsonUtility.ToJson(_saveSetting);
+                File.WriteAllText(Application.dataPath +"/mr.yilanci/Multiple Screenshot Editor/Json_Setting.json",Json_setting);
                 Debug.Log(_saveSetting.clickDownload+"4");
 
                 this.Close();
