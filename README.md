@@ -55,6 +55,28 @@ New Things :
 
   https://youtu.be/ffumeUkgDJQ
 
+
+
+--------------
+## Version V1.4
+
+1) Values are not saved on enter problem fixed ( cause of the problem "Unity 2021 and Unity 2022 version).
+
+2) Arrays overlapping fixed.
+
+3)Saving currently device values as json in the asset folder.
+
+4)Saving  output folder path , output folder name and pop-up book as json in the asset folder.
+
+
+
+--------------
+## Version V1.5
+
+1) The manager code was separated from the editor window code.
+
+
+
 --------------
 ## Old Version
 You can learn "How to use this editor ?" on youtube video
@@ -66,6 +88,7 @@ by the way I am not a developer . I am a level designer.
 I can write simple codes ... I coding my need tools.
 
 ![vlcsnap-2022-09-15-01h18m30s916](https://user-images.githubusercontent.com/41707639/190272975-af8e4125-7a8f-4720-b5cc-68b13beadf3c.png)
+
 
 
 
