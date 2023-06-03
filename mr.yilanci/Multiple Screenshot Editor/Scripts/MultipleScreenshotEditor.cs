@@ -42,7 +42,7 @@ namespace MultipleScreenshot.Editor
 
             _soData = new SerializedObject(this);
 
-            _MultipleScreenshotManager.StartingReadJson_2();
+            _MultipleScreenshotManager.StartingReadJson_settingdata();
         }
 
       void OnDisable()
@@ -166,25 +166,36 @@ namespace MultipleScreenshot.Editor
             if (GUILayout.Button ( "Save to Json",GUILayout.Height(50),GUILayout.MinWidth(160)))
             {
                 _MultipleScreenshotManager.SaveDeviceJson(ref _Root);
-           
             }
           
             GUILayout.EndHorizontal();
             
             GUILayout.BeginHorizontal();
             
-            GUI.backgroundColor = _MultipleScreenshotManager._dataPath == "" ? Color.red : Color.green;
-       
+
+            if (_MultipleScreenshotManager._saveSetting.location == "" || _MultipleScreenshotManager._saveSetting.location == null ) 
+            {
+                GUI.backgroundColor = Color.yellow;
+            }
+            else
+            {
+                GUI.backgroundColor = Color.green;
+            }
             if(GUILayout.Button ( "Show Folder",GUILayout.Height(50),GUILayout.MinWidth(160)))
             {
-
                 _MultipleScreenshotManager.ShowFolder();
-
             }
 
-
-            GUI.backgroundColor = _MultipleScreenshotManager._saveSetting.location != ""? Color.yellow : Color.green;
-
+            
+            
+            if (_MultipleScreenshotManager._saveSetting.location == "" || _MultipleScreenshotManager._saveSetting.location == null ) 
+            {
+                GUI.backgroundColor = Color.yellow;
+            }
+            else
+            {
+                GUI.backgroundColor = Color.green;
+            }
             if (GUILayout.Button ( "Where Save SS",GUILayout.Height(50),GUILayout.MinWidth(160)))
             {
                 _MultipleScreenshotManager.WhereSave(ref _Root);
