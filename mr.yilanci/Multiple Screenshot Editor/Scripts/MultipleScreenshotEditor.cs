@@ -14,8 +14,7 @@ namespace MultipleScreenshot.Editor
     {
 
         public  static MultipleScreenshotManager _MultipleScreenshotManager;
-        
-        
+
         private GUIStyle _guiStyle = new GUIStyle();
         private Vector2 _scroll = Vector2.zero;
         
@@ -38,26 +37,23 @@ namespace MultipleScreenshot.Editor
         
         private void OnEnable()
         {
-            _MultipleScreenshotManager = new MultipleScreenshotManager();
-            _MultipleScreenshotManager.StartingReadJson(_Root);
-            ScriptableObject target = _MultipleScreenshotManager._target;
-            
-            _soData = new SerializedObject(target);
-            
+            _MultipleScreenshotManager = CreateInstance<MultipleScreenshotManager>();
+            _MultipleScreenshotManager.StartingReadJson(ref _Root);
+
+            _soData = new SerializedObject(this);
+
             _MultipleScreenshotManager.StartingReadJson_2();
-           
-            
         }
-/*
+
       void OnDisable()
       {
-          _MultipleScreenshotManager.ClosingWriteJson(_MultipleScreenshotManager._Root);
+          _MultipleScreenshotManager.ClosingWriteJson(ref _Root);
       }
-*/
+
         private void OnGUI()
         {
-            // Save Current Device Data  update 
-            //_MultipleScreenshotManager.SaveCurrentDevice(_Root);
+            //Save Current Device Data  update 
+            _MultipleScreenshotManager.SaveCurrentDevice(ref _Root);
          
            
             Debug.Log("......"+_Root.Device.Count);
@@ -162,14 +158,14 @@ namespace MultipleScreenshot.Editor
             
             if (GUILayout.Button ("Load Json",GUILayout.Height(50),GUILayout.MinWidth(160)))
             {
-                _MultipleScreenshotManager.LoadSavedDeviceJson(_Root);
+                _MultipleScreenshotManager.LoadSavedDeviceJson(ref _Root);
             }
 
         
             GUI.backgroundColor = _Root.Device.Count == 0 ? Color.red : Color.yellow;
             if (GUILayout.Button ( "Save to Json",GUILayout.Height(50),GUILayout.MinWidth(160)))
             {
-                _MultipleScreenshotManager.SaveDeviceJson(_Root);
+                _MultipleScreenshotManager.SaveDeviceJson(ref _Root);
            
             }
           
@@ -191,7 +187,7 @@ namespace MultipleScreenshot.Editor
 
             if (GUILayout.Button ( "Where Save SS",GUILayout.Height(50),GUILayout.MinWidth(160)))
             {
-                _MultipleScreenshotManager.WhereSave(_Root);
+                _MultipleScreenshotManager.WhereSave(ref _Root);
 
             }
             GUILayout.EndHorizontal();

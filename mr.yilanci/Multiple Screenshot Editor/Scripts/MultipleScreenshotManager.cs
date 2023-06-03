@@ -24,23 +24,18 @@ namespace MultipleScreenshot.Editor
         public  string _counterHash;
 
 
-        public ScriptableObject _target ;
-        
-        
-
 
         public int _rootElementCount;
 
 
         
 
-        public void StartingReadJson( DeviceList _Root )
+        public void StartingReadJson(ref DeviceList _Root )
         {
            
             // Load Currently Device Data from Json
             TextAsset json_yazi = new TextAsset(File.ReadAllText(Application.dataPath +"/mr.yilanci/Multiple Screenshot Editor/Json_Device_Currently_Save_List.json"));
             _Root = JsonUtility.FromJson<DeviceList>(json_yazi.text);
-            _target = this;
 
             /*
             
@@ -57,7 +52,7 @@ namespace MultipleScreenshot.Editor
             
         }
 
-        public void ClosingWriteJson( DeviceList _Root)
+        public void ClosingWriteJson(ref DeviceList _Root)
         {
             // Save Currently Device Data from Json
             string Json_added = JsonUtility.ToJson(_Root);
@@ -68,7 +63,7 @@ namespace MultipleScreenshot.Editor
             File.WriteAllText(Application.dataPath +"/mr.yilanci/Multiple Screenshot Editor/Json_Setting.json",Json_setting);
         }
 
-        public void SaveCurrentDevice( DeviceList _Root)
+        public void SaveCurrentDevice(ref DeviceList _Root)
         {
             // Save Currently Device List 
             if (_Root.Device.Count != _rootElementCount )
@@ -88,7 +83,7 @@ namespace MultipleScreenshot.Editor
                 EditorApplication.isPlaying = true;
         }
 
-        public void CheckAndTakeSS( DeviceList _Root)
+        public void CheckAndTakeSS(ref DeviceList _Root)
         {
             if (EditorApplication.isPlaying & _Root.Device.Count !=0)
             {
@@ -105,7 +100,7 @@ namespace MultipleScreenshot.Editor
             }
         }
 
-        public void LoadSavedDeviceJson( DeviceList _Root)
+        public void LoadSavedDeviceJson(ref DeviceList _Root)
         {   /// Loading Saved Device Data from json
             TextAsset json_yazi = new TextAsset(File.ReadAllText(Application.dataPath +"/mr.yilanci/Multiple Screenshot Editor/Json_Device_Save_List.json"));
             _Root = JsonUtility.FromJson<DeviceList>(json_yazi.text);
@@ -115,7 +110,7 @@ namespace MultipleScreenshot.Editor
         }
 
 
-        public void SaveDeviceJson( DeviceList _Root)
+        public void SaveDeviceJson(ref DeviceList _Root)
         {
             string Json_added = JsonUtility.ToJson(_Root);
             File.WriteAllText(Application.dataPath +"/mr.yilanci/Multiple Screenshot Editor/Json_Device_Save_List.json",Json_added);
@@ -134,7 +129,7 @@ namespace MultipleScreenshot.Editor
             }
         }
 
-        public void WhereSave( DeviceList _Root)
+        public void WhereSave(ref DeviceList _Root)
         {
             _location = EditorUtility.OpenFolderPanel(_location, "", "");
             _saveSetting.location = _location;
