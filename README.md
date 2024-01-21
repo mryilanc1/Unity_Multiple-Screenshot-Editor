@@ -73,7 +73,9 @@ New Things :
 --------------
 ## Version V1.5
 
-1) The manager code was separated from the editor window code.
+1) Invalid GUILayout state problem fixed for 2020-2021-2022-2023 versions
+
+2) Take ScreenShot Button's colors fixed.
 
 
 
